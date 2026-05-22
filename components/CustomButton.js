@@ -28,18 +28,18 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     alignItems: 'center',
     borderRadius: 12,
-    shadowColor: '#28a745',
+    shadowColor: '#6f42c1',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 6,
     elevation: 4,
   },
   container_PRIMARY: {
-    backgroundColor: '#28a745',
+    backgroundColor: '#6f42c1',
   },
   container_SECONDARY: {
     backgroundColor: '#f8f9fa',
-    borderColor: '#28a745',
+    borderColor: '#6f42c1',
     borderWidth: 2,
     shadowOpacity: 0,
     elevation: 0,
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   text_SECONDARY: {
-    color: '#28a745',
+    color: '#6f42c1',
   },
   text_TERTIARY: {
     color: '#6c757d',

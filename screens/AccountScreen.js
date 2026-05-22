@@ -5,13 +5,13 @@ import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 
 const AccountScreen = ({ route, navigation }) => {
-  const { username: initialUsername, email: initialEmail, phone: initialPhone, dob: initialDob } = route.params;
+  const { username: initialUsername, email: initialEmail, phone: initialPhone, nickname: initialNickname } = route.params;
   
   const [currentUsername, setCurrentUsername] = useState(initialUsername);
   const [newUsername, setNewUsername] = useState(initialUsername);
   const [email, setEmail] = useState(initialEmail || '');
   const [phone, setPhone] = useState(initialPhone || '');
-  const [dob, setDob] = useState(initialDob || '');
+  const [nickname, setNickname] = useState(initialNickname || '');
   const [newPassword, setNewPassword] = useState('');
 
   const onUpdateProfile = async () => {
@@ -30,7 +30,7 @@ const AccountScreen = ({ route, navigation }) => {
       }
 
       const storedDataString = await SecureStore.getItemAsync(currentUsername);
-      let userData = { password: '', email: '', phone: '', dob: '' };
+      let userData = { password: '', email: '', phone: '', nickname: '' };
       
       if (storedDataString) {
         try {
@@ -43,7 +43,7 @@ const AccountScreen = ({ route, navigation }) => {
       if (newPassword) userData.password = newPassword;
       userData.email = email;
       userData.phone = phone;
-      userData.dob = dob;
+      userData.nickname = nickname;
 
       if (newUsername !== currentUsername) {
         await SecureStore.setItemAsync(newUsername, JSON.stringify(userData));
@@ -140,10 +140,10 @@ const AccountScreen = ({ route, navigation }) => {
             />
 
             <CustomInput 
-              label="Date of Birth"
-              placeholder="DD/MM/YYYY" 
-              value={dob} 
-              setValue={setDob} 
+              label="Nickname"
+              placeholder="Enter nickname" 
+              value={nickname} 
+              setValue={setNickname} 
             />
             
             <CustomInput 
@@ -170,7 +170,7 @@ const AccountScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: '#f4fdf6',
+    backgroundColor: '#f8f4fd',
   },
   container: {
     padding: 24,
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: '800',
-    color: '#28a745',
+    color: '#6f42c1',
     marginTop: 20,
     marginBottom: 5,
     textAlign: 'center',
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     padding: 20,
     borderRadius: 16,
-    shadowColor: '#28a745',
+    shadowColor: '#6f42c1',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.05,
     shadowRadius: 8,

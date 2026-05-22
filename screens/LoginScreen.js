@@ -11,28 +11,28 @@ const LoginScreen = ({ navigation }) => {
   const onLoginPressed = async () => {
     console.log('--- LOGIN PRESSED ---');
     console.log('Username:', username);
-    
+
     if (!username || !password) {
       console.log('Validation failed: Missing username or password');
       Alert.alert('Error', 'Please enter both username and password.');
       return;
     }
-    
+
     try {
       console.log('Attempting to read from SecureStore for key:', username);
       const storedDataString = await SecureStore.getItemAsync(username);
-      
+
       if (storedDataString) {
         try {
           const userData = JSON.parse(storedDataString);
           if (userData.password === password) {
             console.log('Password match! Navigating to Account...');
             setPassword('');
-            navigation.navigate('Account', { 
-              username, 
-              email: userData.email, 
+            navigation.navigate('Account', {
+              username,
+              email: userData.email,
               phone: userData.phone,
-              dob: userData.dob
+              nickname: userData.nickname
             });
           } else {
             console.log('Password mismatch!');
@@ -41,12 +41,12 @@ const LoginScreen = ({ navigation }) => {
         } catch (e) {
           // Fallback if data was stored without JSON (from old version)
           if (storedDataString === password) {
-             console.log('Legacy user login success');
-             Alert.alert('Notice', 'Legacy account version. Please update your profile information.');
-             setPassword('');
-             navigation.navigate('Account', { username, email: '', phone: '', dob: '' });
+            console.log('Legacy user login success');
+            Alert.alert('Notice', 'Legacy account version. Please update your profile information.');
+            setPassword('');
+            navigation.navigate('Account', { username, email: '', phone: '', nickname: '' });
           } else {
-             Alert.alert('Error', 'Invalid data or incorrect password.');
+            Alert.alert('Error', 'Invalid data or incorrect password.');
           }
         }
       } else {
@@ -62,29 +62,31 @@ const LoginScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.root}>
       <View style={styles.container}>
-        <Text style={styles.title}>Welcome Back</Text>
-        
-        <CustomInput 
+        <Text style={styles.title}>Welcome</Text>
+
+        <CustomInput
           label="Username"
-          placeholder="Enter your username" 
-          value={username} 
-          setValue={setUsername} 
+          placeholder="Enter your username"
+          value={username}
+          setValue={setUsername}
+          variant="minimal"
         />
-        
-        <CustomInput 
+
+        <CustomInput
           label="Password"
-          placeholder="Enter your password" 
-          value={password} 
-          setValue={setPassword} 
-          secureTextEntry={true} 
+          placeholder="Enter your password"
+          value={password}
+          setValue={setPassword}
+          secureTextEntry={true}
+          variant="minimal"
         />
-        
+
         <CustomButton text="Login" onPress={onLoginPressed} />
-        
-        <CustomButton 
-          text="Don't have an account? Register" 
-          onPress={() => navigation.navigate('Register')} 
-          type="TERTIARY" 
+
+        <CustomButton
+          text="Don't have an account? Register"
+          onPress={() => navigation.navigate('Register')}
+          type="TERTIARY"
         />
       </View>
     </SafeAreaView>
@@ -94,7 +96,7 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: '#f4fdf6',
+    backgroundColor: '#f8f4fd',
   },
   container: {
     padding: 24,
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: '800',
-    color: '#28a745',
+    color: '#6f42c1',
     marginVertical: 40,
     letterSpacing: 0.5,
   },

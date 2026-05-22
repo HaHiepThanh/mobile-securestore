@@ -8,7 +8,7 @@ const RegisterScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [dob, setDob] = useState('');
+  const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -16,7 +16,7 @@ const RegisterScreen = ({ navigation }) => {
     console.log('--- REGISTER PRESSED ---');
     console.log('Register Username:', username);
     
-    if (!username || !email || !phone || !dob || !password || !confirmPassword) {
+    if (!username || !email || !phone || !nickname || !password || !confirmPassword) {
       console.log('Validation failed: Missing fields');
       Alert.alert('Error', 'Please fill in all fields.');
       return;
@@ -43,7 +43,7 @@ const RegisterScreen = ({ navigation }) => {
         password,
         email,
         phone,
-        dob
+        nickname
       };
       await SecureStore.setItemAsync(username, JSON.stringify(userData));
       console.log('User saved successfully.');
@@ -86,10 +86,10 @@ const RegisterScreen = ({ navigation }) => {
           />
 
           <CustomInput 
-            label="Date of Birth"
-            placeholder="DD/MM/YYYY" 
-            value={dob} 
-            setValue={setDob} 
+            label="Nickname"
+            placeholder="Enter your nickname" 
+            value={nickname} 
+            setValue={setNickname} 
             keyboardType="default"
           />
           
@@ -125,7 +125,7 @@ const RegisterScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: '#f4fdf6',
+    backgroundColor: '#f8f4fd',
   },
   container: {
     padding: 24,
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: '800',
-    color: '#28a745',
+    color: '#6f42c1',
     marginVertical: 30,
     letterSpacing: 0.5,
   },
